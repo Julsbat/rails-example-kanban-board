@@ -1,6 +1,10 @@
 class CardsController < ApplicationController
+  before_action :get_board, only: [:show, :edit, :update, :destroy]
   before_action :set_card, only: [:show, :edit, :update, :destroy]
 
+  def get_board
+    @cards = Card.find(params[:id])
+  end
   # GET /cards
   # GET /cards.json
   def index
@@ -19,6 +23,7 @@ class CardsController < ApplicationController
 
   # GET /cards/1/edit
   def edit
+    @cards = Card.find(params[:id]) #try
   end
 
   # POST /cards
@@ -65,6 +70,11 @@ class CardsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_card
       @card = Card.find(params[:id])
+    end
+
+    # try
+    def set_board
+      @board = Card.find(params[:board_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
